@@ -1,13 +1,16 @@
-((root, factory) ->
+((factory) ->
   if typeof define is 'function' and define.amd
     define ['backbone.marionette'], (marionette) ->
-      factory(root, marionette)
+      factory marionette
   else if typeof exports is 'object'
     Marionette = require 'backbone.marionette'
-    module.exports = factory root, Marionette
+    module.exports = factory Marionette
   else
-    factory(root, Backbone.Marionette)
-) this, (Marionette) ->
+    factory Backbone.Marionette
+) (Marionette) ->
+
+  delay = (duration, callback) ->
+    setTimeout callback, duration
 
   getFadeDuration = (region) ->
     @region.transitionDuration or 100
@@ -18,13 +21,12 @@
       if @skipTransition?(view)
         super view
       else
-        setTimeout =>
+        delay duration, =>
           duration = @transitionDuration or 100
           @$el.contents().detach()
           view.$el.hide()
           @el.appendChild(view.el)
           view.$el.fadeIn fadeDuration
-        , duration
 
     _destroyView: ->
       if @skipTransition?(@currentView)

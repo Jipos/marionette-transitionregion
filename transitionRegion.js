@@ -19,7 +19,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
     return setTimeout(callback, duration);
   };
   getFadeDuration = function(region) {
-    return this.region.transitionDuration || 100;
+    return region.transitionDuration || 100;
   };
   return FadeTransitionRegion = (function(superClass) {
     extend(FadeTransitionRegion, superClass);
@@ -29,13 +29,13 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
     }
 
     FadeTransitionRegion.prototype.attachHtml = function(view) {
+      var fadeDuration;
       if (typeof this.skipTransition === "function" ? this.skipTransition(view) : void 0) {
         return FadeTransitionRegion.__super__.attachHtml.call(this, view);
       } else {
-        return delay(duration, (function(_this) {
+        fadeDuration = getFadeDuration(this);
+        return delay(fadeDuration, (function(_this) {
           return function() {
-            var duration;
-            duration = _this.transitionDuration || 100;
             _this.$el.contents().detach();
             view.$el.hide();
             _this.el.appendChild(view.el);
@@ -46,13 +46,13 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
     };
 
     FadeTransitionRegion.prototype._destroyView = function() {
-      var duration, view;
+      var fadeDuration, view;
       if (typeof this.skipTransition === "function" ? this.skipTransition(this.currentView) : void 0) {
         return FadeTransitionRegion.__super__._destroyView.call(this);
       } else {
-        duration = this.transitionDuration || 100;
+        fadeDuration = getFadeDuration(this);
         view = this.currentView;
-        return view.$el.fadeOut(duration, (function(_this) {
+        return view.$el.fadeOut(fadeDuration, (function(_this) {
           return function() {
             if (view.destroy && !view.isDestroyed) {
               view.destroy();

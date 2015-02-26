@@ -13,7 +13,7 @@
     setTimeout callback, duration
 
   getFadeDuration = (region) ->
-    @region.transitionDuration or 100
+    region.transitionDuration or 100
 
   class FadeTransitionRegion extends Marionette.Region
 
@@ -21,8 +21,8 @@
       if @skipTransition?(view)
         super view
       else
-        delay duration, =>
-          duration = @transitionDuration or 100
+        fadeDuration = getFadeDuration @
+        delay fadeDuration, =>
           @$el.contents().detach()
           view.$el.hide()
           @el.appendChild(view.el)
@@ -32,9 +32,9 @@
       if @skipTransition?(@currentView)
         super()
       else
-        duration = @transitionDuration or 100
+        fadeDuration = getFadeDuration @
         view = @currentView
-        view.$el.fadeOut duration, =>
+        view.$el.fadeOut fadeDuration, =>
           if view.destroy and not view.isDestroyed
             view.destroy()
           else

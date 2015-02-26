@@ -1,0 +1,32 @@
+{
+  "name": "marionette.transitionregion",
+  "version": "0.0.1",
+  "description": "A Marionette Region adds jQuery transitions to the showing (and hiding) of views.",
+  "main": "transitionRegion.js",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone.marionette": "^2.3.2",
+    "jquery": "^2.1.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1",
+    "gulp-util": "^3.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jipos/marionette.transitionregion.git"
+  },
+  "homepage": "https://github.com/jipos/marionette.transitionregion",
+  "keywords": [
+    "browser",
+    "backbone",
+    "marionette",
+    "region"
+  ],
+  "author": {
+    "name": "Kevin Rogiers",
+    "url": "https://github.com/jipos"
+  },
+  "license": "MIT"
+}

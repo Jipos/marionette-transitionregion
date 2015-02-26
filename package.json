@@ -1,6 +1,6 @@
 {
   "name": "marionette.transitionregion",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A Marionette Region adds jQuery transitions to the showing (and hiding) of views.",
   "main": "transitionRegion.js",
   "dependencies": {

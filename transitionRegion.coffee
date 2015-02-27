@@ -3,8 +3,7 @@
     define ['backbone.marionette'], (marionette) ->
       factory marionette
   else if typeof exports is 'object'
-    Marionette = require 'backbone.marionette'
-    module.exports = factory Marionette
+    module.exports = factory require('backbone.marionette')
   else
     factory Backbone.Marionette
 ) (Marionette) ->
@@ -16,6 +15,10 @@
     region.transitionDuration or 100
 
   class FadeTransitionRegion extends Marionette.Region
+
+    constructor: (options = {}) ->
+      @skipTransition = options.skipTransition
+      super options
 
     attachHtml: (view) ->
       if @skipTransition?(view)

@@ -2,14 +2,12 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 (function(factory) {
-  var Marionette;
   if (typeof define === 'function' && define.amd) {
     return define(['backbone.marionette'], function(marionette) {
       return factory(marionette);
     });
   } else if (typeof exports === 'object') {
-    Marionette = require('backbone.marionette');
-    return module.exports = factory(Marionette);
+    return module.exports = factory(require('backbone.marionette'));
   } else {
     return factory(Backbone.Marionette);
   }
@@ -24,8 +22,12 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   return FadeTransitionRegion = (function(superClass) {
     extend(FadeTransitionRegion, superClass);
 
-    function FadeTransitionRegion() {
-      return FadeTransitionRegion.__super__.constructor.apply(this, arguments);
+    function FadeTransitionRegion(options) {
+      if (options == null) {
+        options = {};
+      }
+      this.skipTransition = options.skipTransition;
+      FadeTransitionRegion.__super__.constructor.call(this, options);
     }
 
     FadeTransitionRegion.prototype.attachHtml = function(view) {
